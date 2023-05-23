@@ -1,0 +1,108 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MxM mailer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+    <link rel="shortcut icon"
+        href="https://media.istockphoto.com/id/1245268075/vector/sending-fast-mail-icon-newsletter-message-logo-vector.jpg?s=612x612&w=0&k=20&c=-OnmTfaCfo4uIVPO4n0C0jvY0t1xQik8zY7wD095ahM="
+        ddd="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+
+    <br />
+
+    <div class="px-5 col-12 col-lg-6 m-auto">
+        <form action=".//MxM/index.php" id="xpreader_form" method="post">
+            <center>
+                <img class="mb-4"
+                    src="https://media.istockphoto.com/id/1245268075/vector/sending-fast-mail-icon-newsletter-message-logo-vector.jpg?s=612x612&w=0&k=20&c=-OnmTfaCfo4uIVPO4n0C0jvY0t1xQik8zY7wD095ahM="
+                    alt="" width="72" height="57" style="display: flex; justify-content: center" />
+            </center>
+            <h1 class="h3 mb-3 fw-bold">MxM mailer</h1>
+            <div id="result" class="p-2" style="border-left: 5px solid gray; border-radius: 10px; ">
+
+            </div>
+            <br>
+            <div class="form-floating" style="margin-bottom: 10px">
+                <input required type="text" class="form-control" id="from" placeholder="E.g Paypal" />
+                <label for="floatingInput">Sender ID</label>
+            </div>
+            <div class="form-floating" style="margin-bottom: 10px">
+                <input required type="text" class="form-control" id="label" placeholder="E.g Otp for passby" />
+                <label for="floatingInput">Label</label>
+            </div>
+
+
+            <div class="form-floating" style="margin-bottom: 10px">
+                <div required type="text" class="form-control" placeholder="text" style="height: 1000px" id="info" contenteditable="true">
+                    Enter Html or raw test to send to the victim
+                </div>
+              
+            </div>
+            <div class="my-2">
+                NB:: If its in bulk seperate the email address seperate with sign coma ' , '
+            </div>
+            <div class="form-floating" style="margin-bottom: 10px">
+                <input required type="text" class="form-control" placeholder="text" style="min-height: 200px"
+                    id="email" />
+                <label for="floatingPassword">email will goes here.. </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">
+                Send Em
+            </button>
+            <p class="mt-5 mb-3 text-muted">Nb: Donate by MxM</p>
+            <br>
+            <a href="./MxM//report.txt">
+                <strong>
+                    Report
+                </strong>
+            </a>
+    </div>
+
+    </form>
+    <script>
+        // Attach a submit handler to the form
+        $("#xpreader_form").on("submit", function (event) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+
+            // Get some values from elements on the page:
+            var $form = $(this),
+                //  term = $form.find( "input[name='s']" ).val(),
+                url = $form.attr("action");
+
+            // scrape the data from the inputs
+            var email = document.getElementById('email').value;
+            var emailarr = email.split(",");
+            var to__ = emailarr;
+            var from__ = document.getElementById('from').value;
+            var info__ = document.getElementById('info').innerHTML;
+            var label = document.getElementById('label').value;
+
+            // Send the data using post
+            var posting = $.post(url, {
+                "to": to__,
+                "from": from__,
+                "info__": info__,
+                "label": label
+            });
+
+            // Put the results in a div
+            posting.done(function (data) {
+                $("#result").html(data);
+            });
+        });
+    </script>
+</body>
+
+</html>
